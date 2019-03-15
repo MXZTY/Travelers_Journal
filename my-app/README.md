@@ -1,17 +1,17 @@
 ## Each Group Create a new branch from master and label it the feature you are working on
 - then each group member create a branch off of the their groups feature branch. 
 - create local folder for files and make sure your branch head is set to the branch you just created. 
-          - add code and commit and push to your own branch as needed. 
-          - i reccomend doing this with just a comment to test its working properly
-                - you will see you pushed changes in github within the branches section. 
-          - when you are finished working on your branch
-              ensure all changes are pushed and navigate to the github repo/branch you just completed. 
-              click create pull request and it will make a pull request to your groups main branch. 
-              - then go to your groups main branch and you will see there is a new pull request for merging in your branch changes. 
-              - review the changes (Make card in trello and assign another team member to review the changes)
-              - once it is approved for merging into your main group branch, click merge and you have an option to add comments and                     close the branch. 
-              - Test that everything is working on the groups branch (DO NOT MERGE YOUR GROUPS BRANCH UNTIL ALL GROUP MEMBERS BRANCHES                    ARE COMPLETED AND MERGED)
-              - once all group members have merged their branches into the groups branch, and everything is tested, you can either request another review from a different group, or just merge this branch into the master. 
+   add code and commit and push to your own branch as needed. 
+i reccomend doing this with just a comment to test its working properly
+you will see you pushed changes in github within the branches section. 
+when you are finished working on your branch
+ ensure all changes are pushed and navigate to the github repo/branch you just completed. 
+click create pull request and it will make a pull request to your groups main branch. 
+then go to your groups main branch and you will see there is a new pull request for merging in your branch changes. 
+review the changes (Make card in trello and assign another team member to review the changes)
+once it is approved for merging into your main group branch, click merge and you have an option to add comments and                     close the branch. 
+Test that everything is working on the groups branch (DO NOT MERGE YOUR GROUPS BRANCH UNTIL ALL GROUP MEMBERS BRANCHES                    ARE COMPLETED AND MERGED)
+once all group members have merged their branches into the groups branch, and everything is tested, you can either request another review from a different group, or just merge this branch into the master. 
               
               
               - WARNING. 
