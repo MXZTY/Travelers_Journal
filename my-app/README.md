@@ -1,3 +1,37 @@
+## Each Group Create a new branch from master and label it the feature you are working on
+- then each group member create a branch off of the their groups feature branch. 
+- create local folder for files and make sure your branch head is set to the branch you just created. 
+          - add code and commit and push to your own branch as needed. 
+          - i reccomend doing this with just a comment to test its working properly
+                - you will see you pushed changes in github within the branches section. 
+          - when you are finished working on your branch
+              ensure all changes are pushed and navigate to the github repo/branch you just completed. 
+              click create pull request and it will make a pull request to your groups main branch. 
+              - then go to your groups main branch and you will see there is a new pull request for merging in your branch changes. 
+              - review the changes (Make card in trello and assign another team member to review the changes)
+              - once it is approved for merging into your main group branch, click merge and you have an option to add comments and                     close the branch. 
+              - Test that everything is working on the groups branch (DO NOT MERGE YOUR GROUPS BRANCH UNTIL ALL GROUP MEMBERS BRANCHES                    ARE COMPLETED AND MERGED)
+              - once all group members have merged their branches into the groups branch, and everything is tested, you can either request another review from a different group, or just merge this branch into the master. 
+              
+              
+              - WARNING. 
+               - incase you do not know how to deal with merge conflicts. 
+               - if there has been changes on your group branch that havent been pulled to your local branch, you must pull these changes before you push or you may get a merge conflict. 
+               - Also if you and another group member are working on the same files, you will also get a merge conflict when you go to merge your branches. 
+               - to handle merge conflicts, use visual studio code (the git section) and your merge conflicts will show up there. 
+               - there will be 2 versions of each of the conflicting files, and each line that is different will be highlighted in both copies. 
+               - review each of these conflicts and select the change that you wish to apply (the version on the server/ your local version and there is an option to keep both versions too). 
+                   ******** PLEASE BE CAREFUL WITH MERGE CONFLICTS AS YOU MAY LOSE WORK OR ACCIDENTALLY DELETE OTHER PEOPLES WORK!!!!!!! THIS IS SUPER IMPORTANT SO IF YOU HAVE MERGER CONFLICTS AND ARE UNSURE WHAT TO DO WITH THEM PLEASE CONSULT OTHER MEMBERS OR GROUPS!!!!!!!
+              
+              
+To get the app working locally, simply ensure your local repo contains the package.json file with the dependancies for the project. 
+- run `sudo npm install -g` to install these packages and make sure you are in the my-app folder when doing this. 
+- After you have installed these packages you will see a folder called node-modules within the my-app folder.
+use npm start and you should be up and running. 
+- if you are getting a node or npm error, simply update your local npm version and reinstall node. 
+- check npm version with 'npm -v'
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
