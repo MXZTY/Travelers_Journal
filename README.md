@@ -1,5 +1,5 @@
 ## Each Group Create a new branch from master and label it the feature you are working on
-- then each group member create a branch off of the their groups feature branch. 
+- then each group member create a branch off of the their groups feature branch.
 
 create local folder for files and make sure your branch head is set to the branch you just created. 
    
