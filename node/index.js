@@ -10,3 +10,5 @@ const port = 3001;
 server.listen(port);
 // display a message on the terminal
 console.log("Server running at port=" + port);
+
+require('./fileupload/upload.js');
