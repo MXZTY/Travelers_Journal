@@ -349,3 +349,29 @@ legend {
   float: right;
   width: 20%;
 }
+
+.loginPage{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--favorites-back);
+}
+
+.loginForm {
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  float: right;
+
+}
+
+.loginInput {
+  width: 20%;
+  flex-direction: column;
+  float: right;
+}
+
+.loginButton{
+  background: black;
+  float: right;
+}

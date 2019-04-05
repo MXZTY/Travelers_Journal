@@ -10,7 +10,7 @@ const app = express();
 
 /* --- Middleware --- */
 
-app.use(bodyParser.json());
+app.use(parser.json());
 
 app.use('/users', require('./routes/usersRoutes'));
 

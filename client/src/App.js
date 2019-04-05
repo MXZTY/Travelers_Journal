@@ -6,6 +6,11 @@ import Favorites from './components/Favorites';
 import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
+import Login from './components/login.js';
+import Signup from './components/Signup.js'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'; 
+import reducers from './components/reducers/index.js';
 
 
 const _ = require('lodash');
@@ -114,13 +119,17 @@ class App extends Component {
 
   render() {
     return (
+      <Provider store={createStore( reducers, {})}>
       <div>
-        <HeaderApp />
-        <Route path='/' exact component={Home} />
-        <Route path='/home' exact component={Home} />
-        <Route path='/about' exact component={About} />
-        <Route path='/browse' exact 
-            render={ (props) =>
+        
+          <HeaderApp />
+            <Route path='/' exact component={Home} />
+            <Route path='/login' exact component={Login} />
+            <Route path='/signup' exact component={Signup} />
+            <Route path='/home' exact component={Home} />
+            <Route path='/about' exact component={About} />
+            <Route path='/browse' exact 
+                render={ (props) =>
               <React.Fragment>
                 <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
                 <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
@@ -128,6 +137,7 @@ class App extends Component {
             }
         />
       </div>
+      </Provider>
     );
   }
 }
