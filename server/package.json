@@ -4,7 +4,7 @@
     "description": "",
     "main": "travel-server.js",
     "scripts": {
-        "server-dev": "nodemon travel-server.js",
+        "server-dev": "nodemon sertravel-server.js",
         "client-dev": "npm start --prefix client"
     },
     "author": "WetToast",
