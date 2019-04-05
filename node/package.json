@@ -1,0 +1,14 @@
+{
+    "name": "apiauthentication", 
+    "version": "1.0.0",
+    "description": "",
+    "main":"travel-server.js", 
+    "scripts": {
+        "start-dev": "nodemon travel-server.js"
+    }, 
+    "author": "WetToast", 
+    "License": "ISC", 
+    "dependancies":{
+        
+    }
+}
