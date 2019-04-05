@@ -32,7 +32,6 @@ module.exports = {
                 email: email, 
                 password: password 
             }
-            
         });
 
         await newUser.save();
