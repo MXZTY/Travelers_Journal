@@ -71,8 +71,13 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 // LOCAL STRATEGY
 passport.use(new LocalStrategy({
     usernameField: 'email'
-}, async (email, password, done) =>{
+}, async (email, password, done) => {
     try{
+        console.log("email", email);
+        console.log("password", password);
+
+        console.log(user.)
+
         //Find the user from the email field
         const user = await user.findOne({"local.email": email});
     
