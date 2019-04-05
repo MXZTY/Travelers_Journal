@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === 'test'){
     }
 } else {
     module.exports = {
-        JWT_SECRET: '', 
+        JWT_SECRET: 'x', 
         oauth: {
             google: {
                 clientID: 'number', 

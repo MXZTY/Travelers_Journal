@@ -6,6 +6,8 @@ const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const { JWT_SECRET } = require('../configuration/index.js');
 const user = require('../models/userSchema');
 
+console.log(JWT_SECRET);
+
 //JSON Web Tokens Strategy
 passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromHeader('authorization'), 

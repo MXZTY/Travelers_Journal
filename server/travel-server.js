@@ -8,6 +8,9 @@ require('./handlers/dataConnector.js').connect();
 
 const app = express();
 
+//get the data model:
+const Image = require('./models/imageSchema.js');
+
 /* --- Middleware --- */
 
 app.use(parser.json());
