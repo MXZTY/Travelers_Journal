@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken');
-const User = require('../models/userSchema.js');
+const user = require('../models/userSchema.js');
 const { JWT_SECRET } = require('../configuration/index.js');
 
 signToken = user => {
@@ -20,7 +20,7 @@ module.exports = {
         const {email, password} = req.value.body;
 
         //check if this user already exists in the system
-        const foundUser = await User.fineOne({ "local.email": email });
+        const foundUser = await user.findOne({ "local.email": email });
         if(foundUser){
             return res.status(403).json({error: "email is already in use!"})
         }
