@@ -1,6 +1,6 @@
 // https://medium.com/@iwozzy/easily-host-images-with-node-and-google-cloud-storage-29fb14e2cdb8
 const {Storage} = require('@google-cloud/storage');
-
+const fs = require('fs');
 const storage = new Storage({
   projectId: 'credible-cosine-228918',
   keyFilename: '../key.json'
@@ -30,6 +30,9 @@ myBucket.upload(localFileLocation, { public: true })
   .then(file => {
     // file saved
 	console.log("FILE WAS UPLOADED TO GOOGLE STORAGE");
+	console.log(imgPath);
+	fs.unlinkSync(imgPath);
+	console.log("file is deleted from server");
 	return getPublicThumbnailUrlForItem(imgName);
   })
    

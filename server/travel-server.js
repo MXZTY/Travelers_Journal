@@ -39,7 +39,7 @@ const type = upload.single('photo');
 app.post('/upload', type, (req, res) => {
 	if(req.file){
 		let tempPath = req.file.path;
-		let targetPath = 'uploads/' + req.file.originalname;
+		let targetPath = 'uploads/images/' + req.file.originalname;
 		let src = fs.createReadStream(tempPath);
 		let dest = fs.createWriteStream(targetPath);
 		src.pipe(dest);
