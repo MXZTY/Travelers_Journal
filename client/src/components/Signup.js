@@ -37,13 +37,13 @@ class SignUp extends Component {
 
     render() {
         const { handleSubmit } = this.props;
-        const client_id = process.env.GOOGLE_OAUTH_CLIENT;
 
         return (
             <div className="flex-container">
                 <div className='flex-container-row'>
                     <div  style={{ color: "white", background: "var(--details-back)"}}>
                         <img className="logo" src={require('./images/seeThrough.png')} alt='site logo' />
+                        <h1 className="text-center">Sign Up!</h1>
                     </div>
                 </div>
                 <div className="container flex-box row"  style={{ color: "white", background: "var(--details-back)", paddingTop:"30px", marginLeft:"20%", marginRight:"20%" }}>

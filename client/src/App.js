@@ -122,7 +122,7 @@ class App extends Component {
       <div style={{background: "var(--details-back)"}}>
           <HeaderApp />
                   <Route exact path='/' component={Home} />
-                  <Route exact path='/signin' function={SignIn} />
+                  <Route exact path='/signin' component={SignIn} />
                   <Route exact path='/signup' component={SignUp} />
                   <Route exact path='/home' component={Home} />
                   <Route exact path='/about' component={About} />
