@@ -13,8 +13,10 @@ export const signUp = (data) => {
         // step 1: use the data and make http request to back end and send it along
         try{
             // step 2: take the back end's response(jwt token)  
+            console.log('[Action Creator] signup has been called!')
             const res = await axios.post('http://localhost:3001/users/signup', data);
             console.log('response', res);
+            console.log('Action Creator] signup has dispatched an action');
 
             // step 3: dispatch the message that user just signed up (WITH JWT)
             dispatch({

@@ -4,9 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
+
+// the createStore requires a reducer and an initial state (object {} contains all values of our application state)
+// the store can then dispatch events based on their defined type. 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; 
-import reducers from './components/reducers/index.js';
+
+// when an reducer is fired, the reducer receives the state, and defines what action should be carried out based on the actions payload
+// this allows for one action to trigger multiple side effects, that are all completely decoupled from eachother
+import reducers from './components/reducers/reducers.js';
 import reduxThunk from 'redux-thunk'
 
 ReactDOM.render(
