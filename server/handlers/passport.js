@@ -50,10 +50,19 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
         // if its a new account
         const newUser = new user({
+            //
             method: 'google',
-            google: {
+            google: {//this is assigned from what you get back from google oauth
+                //FORMAT >> userSchema structure: google structure 
+                _id:null,
                 id: profile.id, 
-                email: profile.emails[0].value
+                firstname:profile.name.givenName,
+                lastname:profile.name.familyName,
+                city:null,
+                country:null,
+                email: profile.emails[0].value,
+                password_bcrypt:null,
+                apikey:null
             }
         });
 
@@ -69,6 +78,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
 // LOCAL STRATEGY
 passport.use(new LocalStrategy({
+    //sign up sheet: schema placeholder
     usernameField: 'email'
 }, async (email, password, done) => {
     try{
