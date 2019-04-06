@@ -6,11 +6,8 @@ import Favorites from './components/Favorites';
 import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
-import Login from './components/login.js';
-import Signup from './components/Signup.js'
-import { createStore } from 'redux';
-import { Provider } from 'react-redux'; 
-import reducers from './components/reducers/index.js';
+import SignIn from './components/Signin.js';
+import SignUp from './components/Signup.js';
 
 
 const _ = require('lodash');
@@ -110,34 +107,27 @@ class App extends Component {
       // if the item is not in the favorite list, simply push it onto the temp array. 
       copyFavorites.push(favoriteItem);
     }
-
-    
-
     // set the favorites array stored in state to the newly updated favorites list. 
     this.setState({favorites: copyFavorites});
   }
 
+  
+
   render() {
     return (
-      <Provider store={createStore( reducers, {})}>
       <div>
-        
           <HeaderApp />
-            <Route path='/' exact component={Home} />
-            <Route path='/login' exact component={Login} />
-            <Route path='/signup' exact component={Signup} />
-            <Route path='/home' exact component={Home} />
-            <Route path='/about' exact component={About} />
-            <Route path='/browse' exact 
-                render={ (props) =>
-              <React.Fragment>
-                <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
-                <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
-              </React.Fragment>
-            }
-        />
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/signin' function={SignIn} />
+                  <Route exact path='/signup' component={SignUp} />
+                  <Route exact path='/home' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/browse' render={ (props) =>
+                  <React.Fragment>
+                      <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
+                      <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
+                  </React.Fragment> } />
       </div>
-      </Provider>
     );
   }
 }

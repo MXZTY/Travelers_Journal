@@ -37,7 +37,6 @@ userSchema.pre('save', async function(next) {
         if(this.method !== 'local'){
             next();
         }
-
         // generate the salt
         const salt = await bcrypt.genSalt(10);
         //generate the password hash (salt + hash)

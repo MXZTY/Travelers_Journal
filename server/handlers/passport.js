@@ -21,7 +21,6 @@ passport.use(new JwtStrategy({
         if(!user){
             return done(null, false);
         }
-
         // else return the user with no errors
         done(null, user);
     } catch(error){
