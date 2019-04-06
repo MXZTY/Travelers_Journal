@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const multer = require ('multer');
 const upload = multer({dest:__dirname + '/uploads/images'});
 const fs = require('fs');
+const imgUpload = require('./fileupload/upload.js');
 mongoose.Promise = global.Promise;
 require('./handlers/dataConnector.js').connect();
 
@@ -42,7 +43,10 @@ app.post('/upload', type, (req, res) => {
 		let src = fs.createReadStream(tempPath);
 		let dest = fs.createWriteStream(targetPath);
 		src.pipe(dest);
-		src.on('end', function(){res.json('complete');});
+		src.on('end', function(){
+			let imgURL=imgUpload.uploadPhotoToStorage(targetPath, req.file.originalname);
+			res.json(imgURL);
+			});
 		src.on('error', function(err){res.json('error');});
 	}else{
 		throw 'error';
