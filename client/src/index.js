@@ -15,8 +15,15 @@ import { Provider } from 'react-redux';
 import reducers from './components/reducers/reducers.js';
 import reduxThunk from 'redux-thunk'
 
+const jwtToken = localStorage.getItem('JWT_TOKEN');
+
 ReactDOM.render(
-    <Provider store={createStore( reducers, {}, applyMiddleware(reduxThunk))}>
+    <Provider store={createStore( reducers, { 
+        auth: {
+            token: jwtToken, 
+            isAuthenticated: jwtToken ? true : false
+        }
+    }, applyMiddleware(reduxThunk))}>
         <BrowserRouter>
             <App />
         </BrowserRouter>

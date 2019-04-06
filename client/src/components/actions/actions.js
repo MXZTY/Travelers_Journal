@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_SIGN_UP, AUTH_ERROR } from './types'
+import { AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT } from './types'
 
 
 
@@ -32,10 +32,10 @@ export const signUp = (data) => {
                 payload: 'Email is already in use!'
             });
 
-        }
+        };
          
     };
-}
+};
 
 
 export const oauthGoogle = (data) => {
@@ -51,5 +51,16 @@ export const oauthGoogle = (data) => {
         });
 
         localStorage.setItem('JWT_TOKEN', res.data.token);
+    };
+};
+
+export const signout = () => {
+    return dispatch => {
+        localStorage.removeItem("JWT_TOKEN");
+
+        dispatch({
+            type: AUTH_SIGN_OUT, 
+            payload: ''
+        });
     };
 };

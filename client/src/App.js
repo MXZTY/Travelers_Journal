@@ -36,10 +36,14 @@ class App extends Component {
   }
 
   updateStateWithLocalStorage = () => {
-    // if the local storage length is 0 there are no favorited photos stored in localStorage. 
-    if(localStorage.length > 0) {      
+    // if the local storage length is 1 there are no favorited photos stored in localStorage.
+    // we must account for the JWT token being stored in local storage so it should alwas have a length of 1 
+    if(localStorage.length > 1) {      
       // for each of the items in the localStorage, iterate through.
       for(let i = 0; i < localStorage.length; i++){
+        if (localStorage.key(i) === "JWT_TOKEN"){
+          continue;
+        }
         // pass in the parse key value to the addImageToFavorites to add it to the favorites bar. 
         // this will take in the updated values of that photo too if they have been changed on the server,
         // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites. 
