@@ -34,7 +34,6 @@ class SignUp extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    const client_id = process.env.GOOGLE_OAUTH_CLIENT;
 
     return (
       <div className="flex-container">
@@ -45,6 +44,7 @@ class SignUp extends Component {
               src={require("./images/seeThrough.png")}
               alt="site logo"
             />
+            <h1 className="text-center">Sign Up!</h1>
           </div>
         </div>
         <div
@@ -59,7 +59,7 @@ class SignUp extends Component {
         >
           <div className="col">
             <form
-              className="text-center"
+              className=""
               onSubmit={handleSubmit(this.onSubmit)}
             >
               <fieldset className="signUpInput">
