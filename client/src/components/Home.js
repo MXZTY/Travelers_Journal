@@ -9,11 +9,10 @@ class Home extends React.Component {
                 <div>
                     <h1>The Travelers Journal</h1>
                     <h3>Create React App</h3>
-                    
-                    <p>
                     <div>
                         <img className="logo" src={require('./images/seeThrough.png')} alt='site logo' />
                     </div>
+                    <p>
                         <Link to='/signin'>
                             <button> Login </button>
                         </Link>

@@ -115,7 +115,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{background: "var(--details-back)"}}>
           <HeaderApp />
                   <Route exact path='/' component={Home} />
                   <Route exact path='/signin' function={SignIn} />

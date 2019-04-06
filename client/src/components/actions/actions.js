@@ -36,3 +36,20 @@ export const signUp = (data) => {
          
     };
 }
+
+
+export const oauthGoogle = (data) => {
+    return async dispatch =>{
+        console.log('we have received the data on the server');
+        const res = await axios.post('http://localhost:3001/users/oauth/google', {
+            access_token: data
+        });
+
+        dispatch({
+            type: AUTH_SIGN_UP, 
+            payload: res.data.token
+        });
+
+        localStorage.setItem('JWT_TOKEN', res.data.token);
+    };
+};
