@@ -9,13 +9,6 @@ const userSchema = new Schema({
     required: true
   },
   local: {
-    _id: {
-      type: String,
-      lowercase: false
-    },
-    id: {
-      type: NumberInt
-    },
     firstname: {
       type: String,
       lowercase: false
@@ -51,7 +44,7 @@ const userSchema = new Schema({
       lowercase: false
     },
     id: {
-      type: NumberInt
+      type: String
     },
     firstname: {
       type: String,
