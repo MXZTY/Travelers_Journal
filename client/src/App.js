@@ -11,8 +11,10 @@ import Signup from './components/Signup.js'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'; 
 import reducers from './components/reducers/index.js';
+import fontawesome from '@fortawesome/fontawesome'
+import faFreeSolid from '@fortawesome/fontawesome-free-solid'
 
-
+fontawesome.library.add(faFreeSolid);
 const _ = require('lodash');
 
 

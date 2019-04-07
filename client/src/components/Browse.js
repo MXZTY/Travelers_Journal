@@ -3,6 +3,7 @@ import PhotoList from "./PhotoList.js";
 import ViewPhoto from "./ViewPhoto.js";
 import EditPhotoForm from "./EditPhotoForm.js";
 import PhotoMap from "./PhotoMap.js";
+import UploadPhoto from "./UploadPhoto.js"
 
 class Browser extends Component {
   // default the current photo value to 1, and set the default view to photoview, and no queryValue(filter).
@@ -13,6 +14,7 @@ class Browser extends Component {
       currentPhoto: 1,
       isEdit: false,
       isMap: false,
+        iuUpload: false,
       queryValue: null,
       userLat: 0,
       userLong: 0
@@ -47,14 +49,17 @@ class Browser extends Component {
           setView={this.setView}
           setEdit={this.setEdit}
           setMap={this.setMap}
+        currentPhoto={this.state.currentPhoto}
+          setUploadForm={this.setUploadForm}
           filterPhotos={this.filterPhotos}
           photos={this.props.photos}
           addImageToFavorites={this.props.addImageToFavorites}
           deletePhoto={this.deletePhoto}
         />
-        {!this.state.isEdit && !this.state.isMap ? this.renderView() : null}
+        {!this.state.isEdit && !this.state.isMap && !this.state.isUpload ? this.renderView() : null}
         {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
         {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
+        {this.state.isUpload ? this.renderUploadForm() : null}
       </section>
     );
   }
@@ -68,6 +73,16 @@ class Browser extends Component {
         updatePhoto={this.props.updatePhoto}
         setMap={this.setMap}
         setView={this.setView}
+      />
+    );
+  };
+
+ // this function returns the UploadPhoto so that users can add photos to PhotoList 
+  renderUploadForm = () => {
+     
+    return (
+      <UploadPhoto
+     
       />
     );
   };
@@ -116,7 +131,7 @@ class Browser extends Component {
   // returns the render edit function above after the state is set to the new id
   setEdit = id => {
     console.log("Setting the Edit View for Photo: " + id);
-    this.setState({ currentPhoto: id, isEdit: true, isMap: false });
+    this.setState({ currentPhoto: id, isEdit: true, isMap: false, isUpload:false});
     return this.renderEdit;
   };
 
@@ -124,7 +139,7 @@ class Browser extends Component {
   // returns the render map function above after the state is set to the new id.
   setMap = id => {
     console.log("Setting the Map View for Photo: " + id);
-    this.setState({ currentPhoto: id, isMap: true, isEdit: false });
+    this.setState({ currentPhoto: id, isMap: true, isEdit: false, isUpload:false });
     return this.renderMap;
   };
 
@@ -132,12 +147,21 @@ class Browser extends Component {
   // returns the render view function above after the state is set to the new id.
   setView = id => {
     console.log("Setting the default View for Photo: " + id);
-    this.setState({ currentPhoto: id, isMap: false, isEdit: false });
+    this.setState({ currentPhoto: id, isMap: false, isEdit: false, isUpload:false });
     return this.renderView;
+  };
+      
+      
+// function for setting the state to the uploadPhoto Form view 
+  // returns the render uploadePhoto function above after the state is set to the new id.
+  setUploadForm = id => {
+    console.log("Setting the Upload Photo Form View");
+    this.setState({currentPhoto: id, isMap: false, isEdit: false, isUpload:true });
+    return this.renderUploadForm;
   };
 
   showImageDetails = id => {
-    this.setState({ currentPhoto: id, isEdit: false, isMap: false });
+    this.setState({ currentPhoto: id, isEdit: false, isMap: false, isUpload:false});
   };
 }
 export default Browser;

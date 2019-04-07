@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 const HeaderMenu = (props) => {
     return(
         <nav>
+            
             <Link to='/home'>
                 <button>Home</button>
             </Link>
@@ -13,8 +14,11 @@ const HeaderMenu = (props) => {
             <Link to='/about'>
                 <button>About</button>
             </Link>
+        <button>
+            <i className="fas fa-bell"></i>
+        </button>
         </nav>
-
+        
     );
 }
 
