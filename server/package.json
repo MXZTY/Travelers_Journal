@@ -5,12 +5,7 @@
     "main": "travel-server.js",
     "scripts": {
         "server-dev": "nodemon travel-server.js",
-<<<<<<< HEAD
-        "client-dev": "npm start --prefix client",
-        "startApp": "concurrently \"npm run server-dev\" \"npm run client-dev\""
-=======
         "client-dev": "npm start --prefix client"
->>>>>>> 1a5620b1ce1afc44ed74532a8f15de86a27121a3
     },
     "author": "WetToast",
     "License": "ISC",
