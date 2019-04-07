@@ -54,15 +54,13 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
             method: 'google',
             google: {//this is assigned from what you get back from google oauth
                 //FORMAT >> userSchema structure: google structure 
-                _id:null,
                 id: profile.id, 
                 firstname:profile.name.givenName,
                 lastname:profile.name.familyName,
                 city:null,
                 country:null,
                 email: profile.emails[0].value,
-                password_bcrypt:null,
-                apikey:null
+                password:null,
             }
         });
 

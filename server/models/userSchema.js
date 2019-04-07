@@ -9,12 +9,8 @@ const userSchema = new Schema({
     required: true
   },
   local: {
-    _id: {
-      type: String,
-      lowercase: false
-    },
     id: {
-      type: NumberInt
+      type: Number
     },
     firstname: {
       type: String,
@@ -36,7 +32,7 @@ const userSchema = new Schema({
       type: String,
       lowercase: true
     },
-    password_bcrypt: {
+    password: {
       type: String
     },
     apikey: {
@@ -46,12 +42,8 @@ const userSchema = new Schema({
   },
   google: {
     //google id property
-    _id: {
-      type: String,
-      lowercase: false
-    },
     id: {
-      type: NumberInt
+      type: Number
     },
     firstname: {
       type: String,
@@ -73,7 +65,7 @@ const userSchema = new Schema({
       type: String,
       lowercase: true
     },
-    password_bcrypt: {
+    password: {
       type: String
     },
     apikey: {
