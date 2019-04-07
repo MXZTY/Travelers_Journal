@@ -1,6 +1,7 @@
 const JWT = require('jsonwebtoken');
 const user = require('../models/userSchema.js');
 const { JWT_SECRET } = require('../configuration/index.js');
+const uuidv4 = require('uuid/v4');
 
 signToken = user => {
     // only need to focus on the payload header and signature will be automatic.... i think...
@@ -31,12 +32,14 @@ module.exports = {
         const newUser = new user({ 
             method: 'local',  
             local: {
-                firstname,
-                lastname,
-                city,
-                country,
-                email,
-                password
+                "id":uuidv4(),
+                "details.firstname":firstname,
+                "details.lastname":lastname,
+                "details.city":city,
+                "details.country":country,
+                "email":email,
+                "password_bcrypt":password,
+                "apikey":uuidv4()
             }
         });
 
