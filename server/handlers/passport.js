@@ -72,16 +72,16 @@ passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async (email, password, done) =>{
     try{
+		console.log("using local strategy");
         //Find the user from the email field
-        const user = await user.findOne({"local.email": email});
-    
+        const localUser = await user.findOne({"local.email": email});
         // if not, handle it
-        if(!user){
+        if(!localUser){
             return done(null, false);
         }
 
         // cheack if the password is correct. 
-        const isMatch = await user.isValidPassword(password);
+        const isMatch = await localUser.isValidPassword(password);
 
         // if not handle it. 
         if(!isMatch){
@@ -89,7 +89,7 @@ passport.use(new LocalStrategy({
         }
 
         //otherwise return the user. 
-        done(null, user);
+        done(null, localUser);
 
     } catch(error){
         done(error, false);
