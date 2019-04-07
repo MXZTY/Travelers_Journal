@@ -10,29 +10,31 @@ const userSchema = new Schema({
   },
   local: {
     id: {
-      type: Number
+      type: String
     },
-    firstname: {
-      type: String,
-      lowercase: false
-    },
-    lastname: {
-      type: String,
-      lowercase: false
-    },
-    city: {
-      type: String,
-      lowercase: false
-    },
-    country: {
-      type: String,
-      lowercase: false
+    details: {
+      firstname: {
+        type: String,
+        lowercase: false
+      },
+      lastname: {
+        type: String,
+        lowercase: false
+      },
+      city: {
+        type: String,
+        lowercase: false
+      },
+      country: {
+        type: String,
+        lowercase: false
+      }
     },
     email: {
       type: String,
       lowercase: true
     },
-    password: {
+    password_bcrypt: {
       type: String
     },
     apikey: {
@@ -43,29 +45,31 @@ const userSchema = new Schema({
   google: {
     //google id property
     id: {
-      type: Number
+      type: String
     },
-    firstname: {
-      type: String,
-      lowercase: false
-    },
-    lastname: {
-      type: String,
-      lowercase: false
-    },
-    city: {
-      type: String,
-      lowercase: false
-    },
-    country: {
-      type: String,
-      lowercase: false
+    details: {
+      firstname: {
+        type: String,
+        lowercase: false
+      },
+      lastname: {
+        type: String,
+        lowercase: false
+      },
+      city: {
+        type: String,
+        lowercase: false
+      },
+      country: {
+        type: String,
+        lowercase: false
+      }
     },
     email: {
       type: String,
       lowercase: true
     },
-    password: {
+    password_bcrypt: {
       type: String
     },
     apikey: {
@@ -85,9 +89,9 @@ userSchema.pre("save", async function(next) {
     // generate the salt
     const salt = await bcrypt.genSalt(10);
     //generate the password hash (salt + hash)
-    const passHash = await bcrypt.hash(this.local.password, salt);
+    const passHash = await bcrypt.hash(this.local.password_bcrypt, salt);
     // Re-assign hashed version over the original plain text version
-    this.local.password = passHash;
+    this.local.password_bcrypt = passHash;
   } catch (error) {
     next(error);
   }
@@ -95,7 +99,7 @@ userSchema.pre("save", async function(next) {
 
 userSchema.methods.isValidPassword = async function(passwordIn) {
   try {
-    return await bcrypt.compare(passwordIn, this.local.password);
+    return await bcrypt.compare(passwordIn, this.local.password_bcrypt);
   } catch (error) {
     throw new Error(error);
   }
