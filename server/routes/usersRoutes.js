@@ -14,7 +14,7 @@ router.route('/signup')
     .post(validateBody(schemas.authSchema), usersController.signUp);
 
 router.route('/signin')
-    .post(validateBody(schemas.authSchema), passportSignin, usersController.signIn);
+    .post(validateBody(schemas.loginSchema), passportSignin, usersController.signIn);
 
 router.route('/oauth/google')
     .post(passportGoogle, usersController.googleOAuth);
