@@ -72,33 +72,3 @@ module.exports = {
     }
 
 }
-
-/* CURRENT
-
-"method" : "local",
-	"local" : {
-		"id" : "04e367a6-5ad1-423c-b865-f3b9de02937d",
-		"firstname" : "q",
-		"lastname" : "w",
-		"city" : "e",
-		"country" : "r",
-		"email" : "qwerty@12345.com",
-		"password" : "$2b$10$tci7PkEINLtcZEO2iKyiEOiW3oe0Vt8.lSwQJsPPXsCQbpQklksiy",
-		"apikey" : "2a49ce9b-c093-4655-a915-fa5de2d0c1c0"
-	},
-    "__v" : 0
-
-*/
-
-/* DESIRED
-"id" : 3,
-	"details" : {
-		"firstname" : "Zarla",
-		"lastname" : "Pochet",
-		"city" : "Chicago",
-		"country" : "United States"
-	},
-	"email" : "zpochet2@apple.com",
-	"password_bcrypt" : "$2a$12$oWzc1WbCuMOpQuoon4moGeXS1uJRoOe5xZ9WlsU/Ic2bUYp8ivnYq",
-    "apikey" : "11706403fd1547cbb9c51eae79eeaf2e"
-*/
