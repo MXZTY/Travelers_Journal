@@ -8,7 +8,7 @@ import About from './components/About.js';
 import { Route } from 'react-router-dom';
 import SignIn from './components/Signin.js';
 import SignUp from './components/Signup.js';
-
+import authenticationGuard from './components/higherOrderComponents/authenticationGuard';
 
 const _ = require('lodash');
 
@@ -125,12 +125,13 @@ class App extends Component {
                   <Route exact path='/signin' component={SignIn} />
                   <Route exact path='/signup' component={SignUp} />
                   <Route exact path='/home' component={Home} />
-                  <Route exact path='/about' component={About} />
+                  <Route exact path='/about' component={authenticationGuard(About)} />
                   <Route exact path='/browse' render={ (props) =>
-                  <React.Fragment>
+                    <React.Fragment>
                       <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
                       <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
-                  </React.Fragment> } />
+                    </React.Fragment> }
+                  /> 
       </div>
     );
   }

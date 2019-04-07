@@ -3,8 +3,12 @@ import PhotoList from "./PhotoList.js";
 import ViewPhoto from "./ViewPhoto.js";
 import EditPhotoForm from "./EditPhotoForm.js";
 import PhotoMap from "./PhotoMap.js";
+import { getSecret } from "./actions/actions.js";
+import { connect } from 'react-redux';
+import * as actions from './actions/actions';
+import authenticationGuard from "./higherOrderComponents/authenticationGuard.js";
 
-class Browser extends Component {
+class Browse extends Component {
   // default the current photo value to 1, and set the default view to photoview, and no queryValue(filter).
   constructor(props) {
     super(props);
@@ -17,7 +21,12 @@ class Browser extends Component {
       userLat: 0,
       userLong: 0
     };
+    console.log(this.state);
   }
+
+  async componentDidMount(){
+    getSecret();
+  };
 
   updateCoord = (userLat, userLong) => {
     this.setState({
@@ -142,4 +151,11 @@ class Browser extends Component {
     this.setState({ currentPhoto: id, isEdit: false, isMap: false });
   };
 }
-export default Browser;
+
+function mapStateToProps(state){
+  return{
+    secret: state.browseAuth.secret
+  }   
+}
+
+export default connect(mapStateToProps, actions)(Browse);

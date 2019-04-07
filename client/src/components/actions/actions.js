@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN } from './types'
+import { AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN, BROWSE_GET_DATA } from './types'
 
 
 
@@ -26,6 +26,8 @@ export const signUp = (data) => {
 
             // step 4: save the JWT token into our local storage.
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            axios.defaults.headers.common['Authorization'] = res.data.token;
+
         } catch (err) {
             dispatch({
                 type: AUTH_ERROR, 
@@ -45,7 +47,7 @@ export const signIn = (data) => {
             console.log('[Action Creator] signup has been called!')
             const res = await axios.post('http://localhost:3001/users/signin', data);
             console.log('response', res);
-            console.log('Action Creator] signup has dispatched an action');
+            console.log('[Action Creator] signup has dispatched an action');
 
             // step 3: dispatch the message that user just signed up (WITH JWT)
             dispatch({
@@ -55,6 +57,8 @@ export const signIn = (data) => {
 
             // step 4: save the JWT token into our local storage.
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            axios.defaults.headers.common['Authorization'] = res.data.token;
+
         } catch (err) {
             dispatch({
                 type: AUTH_ERROR, 
@@ -79,16 +83,37 @@ export const oauthGoogle = (data) => {
         });
 
         localStorage.setItem('JWT_TOKEN', res.data.token);
+        axios.defaults.headers.common['Authorization'] = res.data.token;
+
     };
 };
 
 export const signout = () => {
     return dispatch => {
         localStorage.removeItem("JWT_TOKEN");
-
+        axios.defaults.headers.common['Authorization'] = '';
         dispatch({
             type: AUTH_SIGN_OUT, 
             payload: ''
         });
     };
 };
+
+export const getSecret = () =>{
+    return async dispatch => {
+        try{
+            console.log('[ActionCreator] trying to get back end secret');
+            const res = await axios.get('http://localhost:3001/users/secret');
+            console.log ('response', res);
+            dispatch({
+                type: BROWSE_GET_DATA, 
+                payload: res.data.secret
+            });
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
