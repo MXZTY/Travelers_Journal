@@ -1,6 +1,7 @@
 const express = require('express');
 const parser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 require('./handlers/dataConnector.js').connect();
@@ -12,6 +13,7 @@ const app = express();
 const Image = require('./models/imageSchema.js');
 
 /* --- Middleware --- */
+app.use(cors());
 
 app.use(parser.json());
 

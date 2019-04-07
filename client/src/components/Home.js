@@ -13,14 +13,11 @@ class Home extends React.Component {
                         <img className="logo" src={require('./images/seeThrough.png')} alt='site logo' />
                     </div>
                     <p>
-                        <Link to='/browse'>
-                            <button>Browse</button>
-                        </Link>
-                        <Link to='/about'>
-                            <button>About</button>
-                        </Link>
-                        <Link to='/login'>
+                        <Link to='/signin'>
                             <button> Login </button>
+                        </Link>
+                        <Link to='/signup'>
+                            <button> Sign Up </button>
                         </Link>
                     </p>
                 </div>

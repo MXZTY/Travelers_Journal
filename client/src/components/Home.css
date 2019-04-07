@@ -81,9 +81,9 @@ body {
   overflow: none;
   height: 300px;
   width: auto;
-  padding-bottom: 50px;
   margin-top: 50px;
   margin-bottom: 50px;
+  float: center;
   
 
 }
