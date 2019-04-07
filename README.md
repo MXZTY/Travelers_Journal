@@ -1,7 +1,8 @@
 ## The Travelers Journal
 =======
 
-![image](https://ns507204.ip-142-4-212.net/traveller.png)
+![image](https://ns507204.ip-142-4-212.net/travellers.png)
+
 
 Group 1:
 * Joshua
