@@ -17,7 +17,8 @@ module.exports = {
     signUp: async (req, res, next) => {
         console.log('UsersController.signUp() called!');
         
-        const {email, password} = req.value.body;
+        //!!form data
+        const {firstname, lastname, city, country, email, password} = req.value.body;
 		console.log(email);
 		console.log(password);
         //check if this user already exists in the system
@@ -26,12 +27,16 @@ module.exports = {
             return res.status(403).json({error: "email is already in use!"})
         }
 
-        //Create the new user
+        //Create the new user //!!!
         const newUser = new user({ 
             method: 'local',  
             local: {
-                email: email, 
-                password: password 
+                firstname,
+                lastname,
+                city,
+                country,
+                email,
+                password
             }
         });
 
