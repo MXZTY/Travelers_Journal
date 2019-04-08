@@ -21,17 +21,10 @@ app.use(cors());
 app.use(parser.json());
 
 app.use('/users', require('./routes/usersRoutes'));
-
+app.use('/api',require('./routes/imagesRoute'));
 const passport = require('./handlers/passport.js');
 
 
-const imageRouter = require('./handlers/imageRouter.js');
-imageRouter.handleAllImages(app, Image);
-imageRouter.handleSingleImage(app, Image);
-imageRouter.handleImagesFromSingleCity(app, Image);
-imageRouter.handleImagesFromSingleCountry(app, Image);
-imageRouter.showSingleImage(app, Image);
-imageRouter.handleAbout(app, Image);
 
 
 const type = upload.single('photo');
