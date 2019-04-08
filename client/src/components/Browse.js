@@ -68,16 +68,18 @@ class Browse extends Component {
               setView={this.setView}
               setEdit={this.setEdit}
               setMap={this.setMap}
+			  currentPhoto={this.state.currentPhoto}
+			  setUploadForm={this.setUploadForm}
               filterPhotos={this.filterPhotos}
               photos={this.props.photos}
               addImageToFavorites={this.props.addImageToFavorites}
               deletePhoto={this.deletePhoto}
             />
-            {!this.state.isEdit && !this.state.isMap ? this.renderView() : null}
-            {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
-            {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
-			{this.state.isUpload ? this.renderUploadForm() : null}
-          </section>
+            {!this.state.isEdit && !this.state.isMap && !this.state.isUpload ? this.renderView() : null}
+        {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
+        {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
+        {this.state.isUpload ? this.renderUploadForm() : null}
+      </section>
         </div>
       );
     }

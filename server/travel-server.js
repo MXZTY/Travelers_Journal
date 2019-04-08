@@ -11,7 +11,7 @@ require('./handlers/dataConnector.js').connect();
 
 const app = express();
 
-app.use(cors({origin: 'http://localhost:3001'}));
+app.use(cors());
 
 //get the data model:
 const Image = require('./models/imageSchema.js');
