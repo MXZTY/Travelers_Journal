@@ -87,13 +87,13 @@ const handleSingleImage = (app, Image) => {
              newImage.save(function (err, image){
              if(err) return console.error(err);
              console.log(image.title + " added to db");
-			 
+			 });
 			 const uPhotoHandler = require('./uploadPhotoHandler.js');
 			 uPhotoHandler.uploadPhoto(req.file);
 			  resp.redirect("localhost:3000/browse");
-        });
+        
+});
 };
-
 const handlesUpload = (app, Image) => {
 	const multer = require('multer');
 	const upload = multer({
