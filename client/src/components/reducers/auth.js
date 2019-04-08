@@ -1,4 +1,8 @@
-import { AUTH_SIGN_UP, AUTH_SIGN_OUT, AUTH_ERROR, AUTH_SIGN_IN } from '../actions/types'
+import { 
+    AUTH_SIGN_UP, 
+    AUTH_SIGN_OUT,
+    AUTH_ERROR,
+    AUTH_SIGN_IN } from '../actions/types'
 
 const DEFAULT_STATE = {
     //boolean to tell us at all times to tell us if the user is authenticated

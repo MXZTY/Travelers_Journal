@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
+import axios from 'axios';
 
 // the createStore requires a reducer and an initial state (object {} contains all values of our application state)
 // the store can then dispatch events based on their defined type. 
@@ -16,6 +17,7 @@ import reducers from './components/reducers/reducers.js';
 import reduxThunk from 'redux-thunk'
 
 const jwtToken = localStorage.getItem('JWT_TOKEN');
+axios.defaults.headers.common['Authorization'] = jwtToken;
 
 ReactDOM.render(
     <Provider store={createStore( reducers, { 

@@ -1,3 +1,6 @@
+import authenticationGuard from "./components/higherOrderComponents/authenticationGuard";
+import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import HeaderApp from './components/HeaderApp.js';
 import Browse from './components/Browse.js'
@@ -12,15 +15,13 @@ import fontawesome from '@fortawesome/fontawesome'
 import faFreeSolid from '@fortawesome/fontawesome-free-solid'
 import SignIn from './components/Signin.js';
 import SignUp from './components/Signup.js';
-
 fontawesome.library.add(faFreeSolid);
 const _ = require('lodash');
-
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { photos: [], favorites: []};
+    this.state = { photos: [], favorites: [] };
   }
 
   async componentDidMount() {
@@ -31,7 +32,6 @@ class App extends Component {
       this.loading = true;
         console.log(jsonData);
       this.setState( { photos: jsonData } );
-        
       // call the update state with local storage method to restore the user favorited photos.
       await this.updateStateWithLocalStorage();
       this.loading = false;
@@ -43,103 +43,102 @@ class App extends Component {
 
   updateStateWithLocalStorage = () => {
     // if the local storage length is 1 there are no favorited photos stored in localStorage.
-    // we must account for the JWT token being stored in local storage so it should alwas have a length of 1 
-    if(localStorage.length > 1) {      
+    // we must account for the JWT token being stored in local storage so it should alwas have a length of 1
+    if (localStorage.length > 1) {
       // for each of the items in the localStorage, iterate through.
-      for(let i = 0; i < localStorage.length; i++){
-        if (localStorage.key(i) === "JWT_TOKEN"){
+      for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) === "JWT_TOKEN") {
           continue;
         }
-        // pass in the parse key value to the addImageToFavorites to add it to the favorites bar. 
+        // pass in the parse key value to the addImageToFavorites to add it to the favorites bar.
         // this will take in the updated values of that photo too if they have been changed on the server,
-        // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites. 
+        // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites.
         this.addImageToFavorites(JSON.parse(localStorage.key(i)), true);
       }
-
     }
-  }
+  };
 
   updatePhoto = (id, photo) => {
-    //Create a deep clone of photos from the state and use lodash function fot ehat task. 
+    //Create a deep clone of photos from the state and use lodash function fot ehat task.
     const copyPhotos = cloneDeep(this.state.photos);
     //find photo to update in cloned array
-    const photoToReplace = copyPhotos.find( p => p.id === id);
+    const photoToReplace = copyPhotos.find(p => p.id === id);
     // replace photo fields with edited values
     photoToReplace.title = photo.title;
     photoToReplace.city = photo.city;
     photoToReplace.country = photo.country;
     //update the state
-    this.setState({photos: copyPhotos});
-  }
+    this.setState({ photos: copyPhotos });
+  };
 
-  deletePhoto = (id) => {
+  deletePhoto = id => {
     console.log("DELETING PHOTO " + id);
     let copyPhotos = cloneDeep(this.state.photos);
     let photoToDelete = copyPhotos.find(p => p.id === id);
-    
-    if(photoToDelete !== null) { 
-      let filteredPhotos = _.remove(copyPhotos, (photoToDelete) => {
-          return photoToDelete.id !== id;
-    });
-    this.setState({photos: filteredPhotos});
-  }
-    if(this.state.favorites.find(f => f.id === id)){
+
+    if (photoToDelete !== null) {
+      let filteredPhotos = _.remove(copyPhotos, photoToDelete => {
+        return photoToDelete.id !== id;
+      });
+      this.setState({ photos: filteredPhotos });
+    }
+    if (this.state.favorites.find(f => f.id === id)) {
       //Create a deep clone of the favorites array stored in state using lodash/cloneDeep
       const copyFavorites = cloneDeep(this.state.favorites);
-      // use the lodash remove function to remove the item the matches the id of the focused item. 
-      _.remove(copyFavorites, (favoriteItem) => {
+      // use the lodash remove function to remove the item the matches the id of the focused item.
+      _.remove(copyFavorites, favoriteItem => {
         return favoriteItem.id === id;
       });
 
-      this.setState({favorites: copyFavorites});
-      }
-  }
+      this.setState({ favorites: copyFavorites });
+    }
+  };
 
-  addImageToFavorites = (id, loading=false) => {
+  addImageToFavorites = (id, loading = false) => {
     //Create a deep clone of the favorites array stored in state using lodash/cloneDeep
     const copyFavorites = cloneDeep(this.state.favorites);
     //create a favorite Item by finding the photo object based on the id
-    const favoriteItem = this.state.photos.find( p => p.id === id);
+    const favoriteItem = this.state.photos.find(p => p.id === id);
 
     localStorage.setItem(id, JSON.stringify(favoriteItem));
 
     //if the item is already in the favorites list, remove the item when the favorite button is pressed.
-    // do not remove the item from favorites if loading is set to true  
-    if(this.state.favorites.find(f => f.id === id) && !loading){
-      console.log('you are unfavoriting' + favoriteItem);
+    // do not remove the item from favorites if loading is set to true
+    if (this.state.favorites.find(f => f.id === id) && !loading) {
+      console.log("you are unfavoriting" + favoriteItem);
 
       localStorage.removeItem(id);
-      // use the lodash remove function to remove the item the matches the id of the focused item. 
-      _.remove(copyFavorites, (favoriteItem) => {
+      // use the lodash remove function to remove the item the matches the id of the focused item.
+      _.remove(copyFavorites, favoriteItem => {
         return favoriteItem.id === id;
       });
     } else {
-      // if the item is not in the favorite list, simply push it onto the temp array. 
+      // if the item is not in the favorite list, simply push it onto the temp array.
       copyFavorites.push(favoriteItem);
     }
-    // set the favorites array stored in state to the newly updated favorites list. 
-    this.setState({favorites: copyFavorites});
-  }
-
-  
+    // set the favorites array stored in state to the newly updated favorites list.
+    this.setState({ favorites: copyFavorites });
+  };
 
   render() {
     return (
-      <div style={{background: "var(--details-back)"}}>
-          <HeaderApp />
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/signin' component={SignIn} />
-                  <Route exact path='/signup' component={SignUp} />
-                  <Route exact path='/home' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/browse' render={ (props) =>
-                  <React.Fragment>
-                      <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
-                      <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
-                  </React.Fragment> } />
+      <div style={{ background: "var(--details-back)" }}>
+        <HeaderApp />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/browse" render={props =>
+                <React.Fragment>
+                  <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites} />
+                  <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto} />
+                </React.Fragment>
+          }
+        />
       </div>
     );
   }
 }
 
-export default App;
+export default App

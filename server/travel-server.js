@@ -23,20 +23,13 @@ app.use(parser.urlencoded({extended: false}));
 
 
 app.use('/users', require('./routes/usersRoutes'));
-
+app.use('/api',require('./routes/imagesRoute'));
 const passport = require('./handlers/passport.js');
-
 
 const imageRouter = require('./handlers/imageRouter.js');
 imageRouter.handleAllImages(app, Image);
 imageRouter.handleSingleImage(app, Image);
 imageRouter.handlesUpload(app, Image);
-
- 
-
-
-
-
 
 let port = 3001;
 app.listen(port, function(){
