@@ -19,7 +19,7 @@ class HeaderMenu extends Component {
     }
 
     render(){
-        console.log("isAuth??????", this.props);
+        //console.log("isAuth??????", this.props);
         return(
         <nav className= "navbar navbar-expand-lg navbar-dark">
             <div className="collapse navbar-collapse">

@@ -4,9 +4,11 @@ import ViewPhoto from "./ViewPhoto.js";
 import EditPhotoForm from "./EditPhotoForm.js";
 import PhotoMap from "./PhotoMap.js";
 import { getSecret } from "./actions/actions.js";
-import { connect } from 'react-redux';
-import * as actions from './actions/actions';
+import { connect } from "react-redux";
+import * as actions from "./actions/actions";
 import authenticationGuard from "./higherOrderComponents/authenticationGuard.js";
+import { Redirect } from "react-router-dom";
+import { noConflict } from "q";
 
 class Browse extends Component {
   // default the current photo value to 1, and set the default view to photoview, and no queryValue(filter).
@@ -21,12 +23,11 @@ class Browse extends Component {
       userLat: 0,
       userLong: 0
     };
-    console.log(this.state);
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     getSecret();
-  };
+  }
 
   updateCoord = (userLat, userLong) => {
     this.setState({
@@ -44,30 +45,40 @@ class Browse extends Component {
     }
   };
 
+
   // Render the filtered Photo list
   // also conditional rendering based on what view is set in the state (map view, edit view, or photo view)
   render() {
     //get user Location
     this.getLocation();
 
-    return (
-      <div className="flex-container">
-      <section className="flex-container-row">
-        <PhotoList
-          setView={this.setView}
-          setEdit={this.setEdit}
-          setMap={this.setMap}
-          filterPhotos={this.filterPhotos}
-          photos={this.props.photos}
-          addImageToFavorites={this.props.addImageToFavorites}
-          deletePhoto={this.deletePhoto}
-        />
-        {!this.state.isEdit && !this.state.isMap ? this.renderView() : null}
-        {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
-        {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
-      </section>
-      </div>
-    );
+    if (!this.props.isAuthenticated) {
+      console.log("bitch u not authentictaed");
+      return(<div>{<Redirect to="/" />}</div>);
+      
+    } else {
+      console.log("bitch u authentictaed");
+      console.log("Browser props: ", this.state);
+
+      return (
+        <div className="flex-container">
+          <section className="flex-container-row">
+            <PhotoList
+              setView={this.setView}
+              setEdit={this.setEdit}
+              setMap={this.setMap}
+              filterPhotos={this.filterPhotos}
+              photos={this.props.photos}
+              addImageToFavorites={this.props.addImageToFavorites}
+              deletePhoto={this.deletePhoto}
+            />
+            {!this.state.isEdit && !this.state.isMap ? this.renderView() : null}
+            {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
+            {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
+          </section>
+        </div>
+      );
+    }
   }
 
   // this function returns the EditPhotoForm, and requires the setMap and setView as props to change the view.
@@ -107,7 +118,7 @@ class Browse extends Component {
         setEdit={this.setEdit}
         setView={this.setView}
         userLat={this.state.userLat}
-        userLong ={this.state.userLong}
+        userLong={this.state.userLong}
       />
     );
   };
@@ -151,11 +162,17 @@ class Browse extends Component {
     this.setState({ currentPhoto: id, isEdit: false, isMap: false });
   };
 }
-
-function mapStateToProps(state){
-  return{
-    secret: state.browseAuth.secret
-  }   
+function mapStateToProps(state) {
+  console.log("brwse props: ", state);
+  return {
+    secret: state.browseAuth.secret,
+    isAuthenticated: state.auth.isAuthenticated,
+    jwtToken: state.auth.jwtToken,
+    history: state.history
+  };
 }
 
-export default connect(mapStateToProps, actions)(Browse);
+export default connect(
+  mapStateToProps,
+  actions
+)(Browse);
