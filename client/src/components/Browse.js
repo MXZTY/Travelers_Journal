@@ -54,12 +54,10 @@ class Browse extends Component {
     //get user Location
     this.getLocation();
     if (!this.props.isAuthenticated) {
-      console.log("bitch u not authentictaed");
       return(<div>{<Redirect to="/" />}</div>);
       
     } else {
-      console.log("bitch u authentictaed");
-      console.log("Browser props: ", this.state);
+      console.log(this.props.apikey)
 
       return (
         <div className="flex-container">
@@ -186,12 +184,13 @@ class Browse extends Component {
   };
 }
 function mapStateToProps(state) {
-  console.log("brwse props: ", state);
+  console.log("browse state: ", state);
   return {
     secret: state.browseAuth.secret,
     isAuthenticated: state.auth.isAuthenticated,
     jwtToken: state.auth.jwtToken,
-    history: state.history
+    history: state.history,
+    apikey: state.auth.apikey
   };
 }
 
