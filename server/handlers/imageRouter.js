@@ -24,6 +24,10 @@ const handleAllImages = (app, Image) => {
 };
 
 const handleSingleImage = (app, Image) => {
+	const multer = require('multer');
+	const upload = multer({
+        dest: __dirname + '../uploads/images'
+    });
     app.route('/api/image/:id')
         .get((req, resp) => {
             Image.find({
@@ -38,11 +42,13 @@ const handleSingleImage = (app, Image) => {
                 }
             });
         });
-    app.route('/api/image/:id')
-        .post((req, resp) => {
+	app.post('/api/image/:id', upload.single('photo'), (req, resp) => {
+			console.log("in the post image data upload block");
           const uuidv1 = require('uuid/v1');
           const newId = uuidv1();
-        console.log(newId);
+			console.log(newId);
+			console.log(req.body);
+			console.log(req.file);
             let newImage = new Image({
                 id: newId ,
                 title: req.body.title,
@@ -74,44 +80,32 @@ const handleSingleImage = (app, Image) => {
                     iso: req.body.exifISO
 
                 },
-                filename: req.body.file
+                filename: req.file.originalname
             });
+			/*
              newImage.save(function (err, image){
              if(err) return console.error(err);
              console.log(image.title + " added to db");
-             });
-           // resp.redirect("localhost:3001/api/upload");
+			 */
+			 const uPhotoHandler = require('./uploadPhotoHandler.js');
+			 uPhotoHandler.uploadPhoto(req.file);
+			  resp.redirect("localhost:3000/browse");
         });
 };
 
 const handlesUpload = (app, Image) => {
-    const multer = require('multer');
-    const fs = require('fs');
-    const upload = multer({
+	const multer = require('multer');
+	const upload = multer({
         dest: __dirname + '../uploads/images'
     });
-    const imgUpload = require('../fileupload/upload.js');
-    const type = upload.single('photo');
-
-    app.post('/api/upload', type, (req, res) => {
-        if (req.file) {
-            let tempPath = req.file.path;
-            let targetPath = 'uploads/images/' + req.file.originalname;
-            let src = fs.createReadStream(tempPath);
-            let dest = fs.createWriteStream(targetPath);
-            src.pipe(dest);
-            src.on('end', function () {
-                let imgURL = imgUpload.uploadPhotoToStorage(targetPath, req.file.originalname);
-                res.json(imgURL);
-            });
-            src.on('error', function (err) {
-                res.json('error');
-            });
-        } else {
-            throw 'error';
-        }
+	const uPhotoHandler = require('./uploadPhotoHandler.js');
+    app.post('/api/upload', upload.single('photo'), (req, res) => {
+		console.log(req);
+		console.log(req.file);
+		console.log("in the image upload block");
+        uPhotoHandler.uploadPhoto(req.file);
         
-        //resp.redirect("localhost:3000/browse");
+        resp.redirect("localhost:3000/browse");
     });
 };
 

@@ -54,7 +54,7 @@ handleChange = e => {
             return(
                 <article className="details">
                      <div className="detailsPhotoBox">
-                        <form className="photoForm" action="http://localhost:3001/api/image/23"method="post">
+                        <form className="photoForm" action="http://localhost:3001/api/image/23"method="post" enctype="multipart/form-data">
                             <legend> Upload New Photo</legend>
                             
                             <label>Title</label>
@@ -76,7 +76,7 @@ handleChange = e => {
                             <label>Longitude</label>
                             <input type='text' onChange={this.handleChange} name='longitude' />
                             <label> Upload a Photo </label>
-                            <input type='file' name='file' accept="image/jpeg, .jpg, image/png, .png" />
+                            <input type='file' name='photo' accept="image/jpeg, .jpg, image/png, .png" />
                             <label>Make</label> 
                             <input type='text' name='make' />
                             <label>Model </label>
@@ -88,7 +88,7 @@ handleChange = e => {
                             <label>Focal Length</label>
                             <input type='text' name='focal' />
                             <label>Exif ISO</label>
-                            <input type='text' name='exifISO' /> <br/>
+                            <input type='number' name='exifISO' /> <br/>
                             <button type="submit">Submit </button>
                         </form>
                         <br />
