@@ -1,7 +1,7 @@
 const http = require('http');
 // Configure HTTP server to respond with simple message to all requests
 const server = http.createServer(function (request, response) {
-    response.writeHead(200, { "Content-Type": "text/plain" });
+    response.writeHead(200, { "Content-Type": "text/plain", "Access-Control-Allow-Origin": "*" });
     response.write("Hello, i'm a node.js file that runs!\n");
     response.end();
 });

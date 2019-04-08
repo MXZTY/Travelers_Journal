@@ -23,7 +23,7 @@ class Favorites extends React.Component {
     console.log("downloading Now");
 
     for( let i of this.props.favorites){
-      let url = `https://cors-anywhere.herokuapp.com/storage.googleapis.com/funwebdev-3rd-travel/large/${
+      let url = `https://cors-anywhere.herokuapp.com/https://storage.googleapis.com/comp4513-asg2-bucket/photos/large//${
               i.path
       }`;
 

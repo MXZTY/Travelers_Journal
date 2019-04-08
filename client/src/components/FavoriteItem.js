@@ -3,7 +3,7 @@ import React from 'react';
 class FavoriteItem extends React.Component {
     render() {
         // define the base url and add the image path to the string. 
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/${this.props.photo.path}`;
+        const imgURL = `https://storage.googleapis.com/comp4513-asg2-bucket/photos/large/${this.props.photo.filename}`;
         return (
             <div className='flex-container'>
                 <figure style={this.styleFigure} >

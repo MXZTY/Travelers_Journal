@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const imageSchema = new mongoose.Schema({
-    id: Number, 
+    id: String, 
     title: String, 
     description: String, 
     location: {
@@ -13,11 +13,24 @@ const imageSchema = new mongoose.Schema({
         longitude: Number
     }, 
     user: {
-        userid: Number, 
+        userid: Number,
+        picture: {
+            large: String,
+            thumbnail: String
+        },
         firstname: String, 
         lastname: String
-    }, 
+    },
+    exif: {
+        make: String,
+        model: String,
+        exposure_time: String,
+        aperture: String,
+        focal_length: String,
+        iso: Number
+        
+    },
     filename: String
 });
 
-module.exports = mongoose.model('Image', imageSchema);
+module.exports = mongoose.model('Image', imageSchema, "Images");

@@ -54,7 +54,7 @@ handleChange = e => {
             return(
                 <article className="details">
                      <div className="detailsPhotoBox">
-                        <form className="photoForm" action="/api/image/"method="post">
+                        <form className="photoForm" action="http://localhost:3001/api/image/23"method="post">
                             <legend> Upload New Photo</legend>
                             
                             <label>Title</label>
@@ -63,6 +63,8 @@ handleChange = e => {
                             <input type='text' name='description' />
                             <label>City</label>
                             <input type='text' name='city' />
+                            <label>ISO </label>
+                            <input type='text' name='iso' />
                             <label>City Code </label>
                             <input type='text' name='cityCode' />
                             <label>Country</label>
@@ -75,7 +77,18 @@ handleChange = e => {
                             <input type='text' onChange={this.handleChange} name='longitude' />
                             <label> Upload a Photo </label>
                             <input type='file' name='file' accept="image/jpeg, .jpg, image/png, .png" />
-                
+                            <label>Make</label> 
+                            <input type='text' name='make' />
+                            <label>Model </label>
+                            <input type='text' name='model' />
+                            <label>Exposure Time </label>
+                            <input type='text' name='expTime' />
+                            <label>Aperture</label>
+                            <input type='text' name='aperture' />
+                            <label>Focal Length</label>
+                            <input type='text' name='focal' />
+                            <label>Exif ISO</label>
+                            <input type='text' name='exifISO' /> <br/>
                             <button type="submit">Submit </button>
                         </form>
                         <br />

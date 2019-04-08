@@ -34,9 +34,9 @@ class PhotoList extends React.Component {
       (photo)=>{
         //if city changed
         if(this.state.input==="City"){
-          return photo.city.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          return photo.location.city.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
         }else{//country changed
-          return photo.country.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          return photo.location.country.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
         }
       } 
     )

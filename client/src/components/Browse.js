@@ -11,7 +11,7 @@ class Browser extends Component {
     super(props);
     this.state = {
       photos: props.photos,
-      currentPhoto: 1,
+      currentPhoto: "3a5c5da5-5a12-4d2b-b0dd-abc28eaf810b" ,
       isEdit: false,
       isMap: false,
         iuUpload: false,

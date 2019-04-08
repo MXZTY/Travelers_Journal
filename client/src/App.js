@@ -26,11 +26,13 @@ class App extends Component {
 
   async componentDidMount() {
     try{
-      const url = "http://randyconnolly.com/funwebdev/services/travel/images.php";
+      const url = "http://localhost:3001/api/images";
       const response = await fetch(url);
       const jsonData = await response.json();
       this.loading = true;
+        console.log(jsonData);
       this.setState( { photos: jsonData } );
+        
       // call the update state with local storage method to restore the user favorited photos.
       await this.updateStateWithLocalStorage();
       this.loading = false;
