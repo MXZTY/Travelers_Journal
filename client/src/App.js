@@ -6,13 +6,12 @@ import Favorites from './components/Favorites';
 import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
-import Login from './components/login.js';
-import Signup from './components/Signup.js'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'; 
-import reducers from './components/reducers/index.js';
 import fontawesome from '@fortawesome/fontawesome'
 import faFreeSolid from '@fortawesome/fontawesome-free-solid'
+import SignIn from './components/Signin.js';
+import SignUp from './components/Signup.js';
 
 fontawesome.library.add(faFreeSolid);
 const _ = require('lodash');
@@ -43,10 +42,14 @@ class App extends Component {
   }
 
   updateStateWithLocalStorage = () => {
-    // if the local storage length is 0 there are no favorited photos stored in localStorage. 
-    if(localStorage.length > 0) {      
+    // if the local storage length is 1 there are no favorited photos stored in localStorage.
+    // we must account for the JWT token being stored in local storage so it should alwas have a length of 1 
+    if(localStorage.length > 1) {      
       // for each of the items in the localStorage, iterate through.
       for(let i = 0; i < localStorage.length; i++){
+        if (localStorage.key(i) === "JWT_TOKEN"){
+          continue;
+        }
         // pass in the parse key value to the addImageToFavorites to add it to the favorites bar. 
         // this will take in the updated values of that photo too if they have been changed on the server,
         // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites. 
@@ -114,34 +117,27 @@ class App extends Component {
       // if the item is not in the favorite list, simply push it onto the temp array. 
       copyFavorites.push(favoriteItem);
     }
-
-    
-
     // set the favorites array stored in state to the newly updated favorites list. 
     this.setState({favorites: copyFavorites});
   }
 
+  
+
   render() {
     return (
-      <Provider store={createStore( reducers, {})}>
-      <div>
-        
+      <div style={{background: "var(--details-back)"}}>
           <HeaderApp />
-            <Route path='/' exact component={Home} />
-            <Route path='/login' exact component={Login} />
-            <Route path='/signup' exact component={Signup} />
-            <Route path='/home' exact component={Home} />
-            <Route path='/about' exact component={About} />
-            <Route path='/browse' exact 
-                render={ (props) =>
-              <React.Fragment>
-                <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
-                <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
-              </React.Fragment>
-            }
-        />
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/signin' component={SignIn} />
+                  <Route exact path='/signup' component={SignUp} />
+                  <Route exact path='/home' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/browse' render={ (props) =>
+                  <React.Fragment>
+                      <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
+                      <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites} deletePhoto={this.deletePhoto}/>
+                  </React.Fragment> } />
       </div>
-      </Provider>
     );
   }
 }

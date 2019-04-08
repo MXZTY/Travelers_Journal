@@ -44,7 +44,8 @@ class Browser extends Component {
     this.getLocation();
 
     return (
-      <section className="container">
+      <div className="flex-container">
+      <section className="flex-container-row">
         <PhotoList
           setView={this.setView}
           setEdit={this.setEdit}
@@ -61,6 +62,7 @@ class Browser extends Component {
         {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
         {this.state.isUpload ? this.renderUploadForm() : null}
       </section>
+      </div>
     );
   }
 

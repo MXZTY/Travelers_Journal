@@ -21,13 +21,13 @@ passport.use(new JwtStrategy({
         if(!user){
             return done(null, false);
         }
-
         // else return the user with no errors
         done(null, user);
     } catch(error){
         done(error, false);
     }
 }));
+
 
 // GOOGLE OAUTH STRATEGY
 passport.use('googleToken', new GooglePlusTokenStrategy({
@@ -50,10 +50,17 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
         // if its a new account
         const newUser = new user({
+            //
             method: 'google',
-            google: {
+            google: {//this is assigned from what you get back from google oauth
+                //FORMAT >> userSchema structure: google structure 
                 id: profile.id, 
-                email: profile.emails[0].value
+                firstname:profile.name.givenName,
+                lastname:profile.name.familyName,
+                city:null,
+                country:null,
+                email: profile.emails[0].value,
+                password:null,
             }
         });
 
@@ -69,8 +76,9 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
 // LOCAL STRATEGY
 passport.use(new LocalStrategy({
+    //sign up sheet: schema placeholder
     usernameField: 'email'
-}, async (email, password, done) =>{
+}, async (email, password, done) => {
     try{
 		console.log("using local strategy");
         //Find the user from the email field
