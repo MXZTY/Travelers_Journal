@@ -15,7 +15,7 @@ const uploadPhoto = (file) =>{
             let dest = fs.createWriteStream(targetPath);
             src.pipe(dest);
             src.on('end', function () {
-                //let imgURL = imgUpload.uploadPhotoToStorage(targetPath, file.originalname);
+                let imgURL = imgUpload.uploadPhotoToStorage(targetPath, file.originalname);
                 //res.json(imgURL);
             });
             src.on('error', function (err) {
