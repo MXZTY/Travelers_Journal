@@ -16,7 +16,7 @@ var file = myBucket.file(imgName)
 // upload file to bucket
 // https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket?method=upload
 let localFileLocation = imgPath;
-myBucket.upload(localFileLocation, { public: true })
+myBucket.upload(localFileLocation, { public: true, destination: "photos/large/" + imgName })
   .then(file => {
     // file saved
 	console.log("FILE WAS UPLOADED TO GOOGLE STORAGE");
