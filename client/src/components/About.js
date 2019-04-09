@@ -13,7 +13,7 @@ class About extends React.Component {
                     <h1>A Simple Travel Photo Website</h1>
                     <h3> Created With React</h3>
                     <br/>
-                    <h2> By JOSHUA BLAIR, SAMER OSMAN, SARF KERMALI, CRYSTON ROBIN, JEHANZEB AHMED.</h2>
+                    <h2> By JOSHUA, SAMER, SARF, CRYSTON, JEHANZEB.</h2>
                     <br/><br/>
                     <h3>Asg2 Details</h3>
                     
