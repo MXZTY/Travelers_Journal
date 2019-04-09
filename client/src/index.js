@@ -19,6 +19,7 @@ import { AssertionError } from 'assert';
 
 const jwtToken = localStorage.getItem('JWT_TOKEN');
 const apiKey = localStorage.getItem('apikey');
+const userId = localStorage.getItem('userid');
 axios.defaults.headers.common['Authorization'] = jwtToken;
 
 ReactDOM.render(
@@ -26,6 +27,7 @@ ReactDOM.render(
         auth: {
             token: jwtToken, 
             apikey: apiKey,
+            userid: userId,
             isAuthenticated: jwtToken ? true : false
         }
     }, applyMiddleware(reduxThunk))}>

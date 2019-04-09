@@ -57,8 +57,6 @@ class Browse extends Component {
       return(<div>{<Redirect to="/" />}</div>);
       
     } else {
-      console.log(this.props.apikey)
-
       return (
         <div className="flex-container">
           <section className="flex-container-row">
@@ -190,7 +188,8 @@ function mapStateToProps(state) {
     isAuthenticated: state.auth.isAuthenticated,
     jwtToken: state.auth.jwtToken,
     history: state.history,
-    apikey: state.auth.apikey
+    apikey: state.auth.apikey,
+    userid: state.auth.userid,
   };
 }
 

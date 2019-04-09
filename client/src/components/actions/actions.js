@@ -27,6 +27,7 @@ export const signUp = (data) => {
             // step 4: save the JWT token into our local storage.
             localStorage.setItem('JWT_TOKEN', res.data.token);
             localStorage.setItem('apikey', res.data.apikey);
+            localStorage.setItem('userid', res.data.userid);
             axios.defaults.headers.common['Authorization'] = res.data.token;
 
         } catch (err) {
