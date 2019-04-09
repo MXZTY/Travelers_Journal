@@ -1,7 +1,7 @@
 import React from "react";
 class PhotoThumb extends React.Component{
     render(){
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/${this.props.photo.path}`;
+        const imgURL = `https://storage.googleapis.com/comp4513-asg2-bucket/photos/large/${this.props.photo.filename}`;
         return(
             <div className="photoBox" onClick={ this.handleViewClick }>
                 <figure style={this.styleFigure}>

@@ -3,6 +3,7 @@ import PhotoList from "./PhotoList.js";
 import ViewPhoto from "./ViewPhoto.js";
 import EditPhotoForm from "./EditPhotoForm.js";
 import PhotoMap from "./PhotoMap.js";
+import UploadPhoto from "./UploadPhoto.js"
 import { getSecret } from "./actions/actions.js";
 import { connect } from "react-redux";
 import * as actions from "./actions/actions";
@@ -16,9 +17,10 @@ class Browse extends Component {
     super(props);
     this.state = {
       photos: props.photos,
-      currentPhoto: 1,
+      currentPhoto: "3a5c5da5-5a12-4d2b-b0dd-abc28eaf810b" ,
       isEdit: false,
       isMap: false,
+        iuUpload: false,
       queryValue: null,
       userLat: 0,
       userLong: 0
@@ -51,15 +53,10 @@ class Browse extends Component {
   render() {
     //get user Location
     this.getLocation();
-
     if (!this.props.isAuthenticated) {
-      console.log("bitch u not authentictaed");
       return(<div>{<Redirect to="/" />}</div>);
       
     } else {
-      console.log("bitch u authentictaed");
-      console.log("Browser props: ", this.state);
-
       return (
         <div className="flex-container">
           <section className="flex-container-row">
@@ -67,15 +64,18 @@ class Browse extends Component {
               setView={this.setView}
               setEdit={this.setEdit}
               setMap={this.setMap}
+			  currentPhoto={this.state.currentPhoto}
+			  setUploadForm={this.setUploadForm}
               filterPhotos={this.filterPhotos}
               photos={this.props.photos}
               addImageToFavorites={this.props.addImageToFavorites}
               deletePhoto={this.deletePhoto}
             />
-            {!this.state.isEdit && !this.state.isMap ? this.renderView() : null}
-            {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
-            {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
-          </section>
+            {!this.state.isEdit && !this.state.isMap && !this.state.isUpload ? this.renderView() : null}
+        {!this.state.isMap && this.state.isEdit ? this.renderEdit() : null}
+        {!this.state.isEdit && this.state.isMap ? this.renderMap() : null}
+        {this.state.isUpload ? this.renderUploadForm() : null}
+      </section>
         </div>
       );
     }
@@ -90,6 +90,16 @@ class Browse extends Component {
         updatePhoto={this.props.updatePhoto}
         setMap={this.setMap}
         setView={this.setView}
+      />
+    );
+  };
+
+ // this function returns the UploadPhoto so that users can add photos to PhotoList 
+  renderUploadForm = () => {
+     
+    return (
+      <UploadPhoto
+     
       />
     );
   };
@@ -138,7 +148,7 @@ class Browse extends Component {
   // returns the render edit function above after the state is set to the new id
   setEdit = id => {
     console.log("Setting the Edit View for Photo: " + id);
-    this.setState({ currentPhoto: id, isEdit: true, isMap: false });
+    this.setState({ currentPhoto: id, isEdit: true, isMap: false, isUpload:false});
     return this.renderEdit;
   };
 
@@ -146,7 +156,7 @@ class Browse extends Component {
   // returns the render map function above after the state is set to the new id.
   setMap = id => {
     console.log("Setting the Map View for Photo: " + id);
-    this.setState({ currentPhoto: id, isMap: true, isEdit: false });
+    this.setState({ currentPhoto: id, isMap: true, isEdit: false, isUpload:false });
     return this.renderMap;
   };
 
@@ -154,21 +164,32 @@ class Browse extends Component {
   // returns the render view function above after the state is set to the new id.
   setView = id => {
     console.log("Setting the default View for Photo: " + id);
-    this.setState({ currentPhoto: id, isMap: false, isEdit: false });
+    this.setState({ currentPhoto: id, isMap: false, isEdit: false, isUpload:false });
     return this.renderView;
+  };
+      
+      
+// function for setting the state to the uploadPhoto Form view 
+  // returns the render uploadePhoto function above after the state is set to the new id.
+  setUploadForm = id => {
+    console.log("Setting the Upload Photo Form View");
+    this.setState({currentPhoto: id, isMap: false, isEdit: false, isUpload:true });
+    return this.renderUploadForm;
   };
 
   showImageDetails = id => {
-    this.setState({ currentPhoto: id, isEdit: false, isMap: false });
+    this.setState({ currentPhoto: id, isEdit: false, isMap: false, isUpload:false});
   };
 }
 function mapStateToProps(state) {
-  console.log("brwse props: ", state);
+  console.log("browse state: ", state);
   return {
     secret: state.browseAuth.secret,
     isAuthenticated: state.auth.isAuthenticated,
     jwtToken: state.auth.jwtToken,
-    history: state.history
+    history: state.history,
+    apikey: state.auth.apikey,
+    userid: state.auth.userid,
   };
 }
 

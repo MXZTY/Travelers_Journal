@@ -21,6 +21,11 @@ class PhotoList extends React.Component {
       this.setState({search: e.target.value, input:"City"})
     }
   }
+  
+  uploadPhoto=(e)=>{
+           this.props.setUploadForm(this.props.currentPhoto);
+      
+  }
 
   render() {
     //https://www.youtube.com/watch?v=OlVkYnVXPl0
@@ -29,19 +34,26 @@ class PhotoList extends React.Component {
       (photo)=>{
         //if city changed
         if(this.state.input==="City"){
-          return photo.city.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          return photo.location.city.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
         }else{//country changed
-          return photo.country.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          return photo.location.country.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
         }
       } 
     )
     if (this.props.photos.length > 1) {
       return (
         <div className="flex-container">
+         
           <div className="filterBy flex-box">
-           <h2 className="flex-title"> Filter By:</h2>
+          
+            <h2 className="flex-title"> Filter By:</h2>
+            
              <input id="countryInput" className="flex-item" name="filterCountry" type="text" placeholder="Country" onChange={this.updateSearch}/> 
              <input id="cityInput" className="flex-item" name="filterCity" type="text" placeholder="City" onChange={this.updateSearch}/>
+           <div className="addPhoto flex-box" >
+            <h2 className="flex-title"> Upload a New Photo: <button onClick={this.uploadPhoto}> <i className="fas fa-upload"></i>
+          </button> </h2>
+          </div>
           </div>
             
 

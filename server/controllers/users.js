@@ -39,7 +39,7 @@ module.exports = {
                 "details.country":country,
                 "email":email,
                 "password_bcrypt":password,
-                "apikey":uuidv4()
+                "apikey":uuidv4(),
             }
         });
 
@@ -48,8 +48,8 @@ module.exports = {
         //Generate Token
         const token = signToken(newUser);
         
-        // respond with token
-        res.status(200).json({ token });
+        // respond with token, user id, and api key
+        res.status(200).json({ token, apikey:newUser.local.apikey, userid:newUser.local.id });
 
     }, 
 

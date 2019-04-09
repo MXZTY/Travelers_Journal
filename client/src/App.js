@@ -1,18 +1,22 @@
-import React, { Component } from "react";
-import HeaderApp from "./components/HeaderApp.js";
-import Browse from "./components/Browse.js";
-import Home from "./components/Home.js";
-import Favorites from "./components/Favorites";
-import * as cloneDeep from "lodash/cloneDeep";
-import About from "./components/About.js";
-import { Route } from "react-router-dom";
-import SignIn from "./components/Signin.js";
-import SignUp from "./components/Signup.js";
 import authenticationGuard from "./components/higherOrderComponents/authenticationGuard";
 import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-
-const _ = require("lodash");
+import React, { Component } from 'react';
+import HeaderApp from './components/HeaderApp.js';
+import Browse from './components/Browse.js'
+import Home from './components/Home.js';
+import Favorites from './components/Favorites';
+import * as cloneDeep from 'lodash/cloneDeep';
+import About from './components/About.js';
+import { Route } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'; 
+import fontawesome from '@fortawesome/fontawesome'
+import faFreeSolid from '@fortawesome/fontawesome-free-solid'
+import SignIn from './components/Signin.js';
+import SignUp from './components/Signup.js';
+fontawesome.library.add(faFreeSolid);
+const _ = require('lodash');
 
 class App extends Component {
   constructor(props) {
@@ -21,13 +25,13 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    try {
-      const url =
-        "http://randyconnolly.com/funwebdev/services/travel/images.php";
+    try{
+      const url = "http://localhost:3001/api/images";
       const response = await fetch(url);
       const jsonData = await response.json();
       this.loading = true;
-      this.setState({ photos: jsonData });
+        console.log(jsonData);
+      this.setState( { photos: jsonData } );
       // call the update state with local storage method to restore the user favorited photos.
       await this.updateStateWithLocalStorage();
       this.loading = false;

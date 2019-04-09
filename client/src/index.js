@@ -15,14 +15,19 @@ import { Provider } from 'react-redux';
 // this allows for one action to trigger multiple side effects, that are all completely decoupled from eachother
 import reducers from './components/reducers/reducers.js';
 import reduxThunk from 'redux-thunk'
+import { AssertionError } from 'assert';
 
 const jwtToken = localStorage.getItem('JWT_TOKEN');
+const apiKey = localStorage.getItem('apikey');
+const userId = localStorage.getItem('userid');
 axios.defaults.headers.common['Authorization'] = jwtToken;
 
 ReactDOM.render(
     <Provider store={createStore( reducers, { 
         auth: {
             token: jwtToken, 
+            apikey: apiKey,
+            userid: userId,
             isAuthenticated: jwtToken ? true : false
         }
     }, applyMiddleware(reduxThunk))}>

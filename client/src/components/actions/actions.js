@@ -26,6 +26,8 @@ export const signUp = (data) => {
 
             // step 4: save the JWT token into our local storage.
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('apikey', res.data.apikey);
+            localStorage.setItem('userid', res.data.userid);
             axios.defaults.headers.common['Authorization'] = res.data.token;
 
         } catch (err) {
@@ -48,6 +50,8 @@ export const signIn = (data) => {
             const res = await axios.post('http://localhost:3001/users/signin', data);
             console.log('response', res);
             console.log('[Action Creator] signup has dispatched an action');
+
+            console.log(res);
 
             // step 3: dispatch the message that user just signed up (WITH JWT)
             dispatch({
