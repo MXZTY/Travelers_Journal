@@ -31,6 +31,7 @@ class App extends Component {
       const jsonData = await response.json();
       this.loading = true;
         console.log(jsonData);
+                
       this.setState( { photos: jsonData } );
       // call the update state with local storage method to restore the user favorited photos.
       await this.updateStateWithLocalStorage();
