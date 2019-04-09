@@ -4,14 +4,15 @@ class PhotoThumb extends React.Component{
         const imgURL = `https://storage.googleapis.com/comp4513-asg2-bucket/photos/large/${this.props.photo.filename}`;
         return(
             <div className="photoBox" onClick={ this.handleViewClick }>
-                <figure style={this.styleFigure}>
+            <div>    
+            <figure style={this.styleFigure}>
                     <button className="buttonItem-delete" style={this.stylex} onClick={this.deletePhoto}>X</button>
                     <img onClick={this.setView} src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title} />
-                </figure>
+                </figure></div>
                 <div className="tileInformation">
                     <div className="tileTitles" >
                         <h3>{this.props.photo.title}</h3>
-                        <p>{this.props.photo.city}, {this.props.photo.country}</p>
+                        <p>{this.props.photo.location.city}, {this.props.photo.location.country}</p>
                     </div>
                     <div className="buttonContainer">
                         <div className="buttonStyling">
@@ -29,7 +30,12 @@ class PhotoThumb extends React.Component{
     }
 
     styleFigure={
-        position: "relative"
+        width: "100px",
+        height: "100px",
+       
+     
+      
+ 
     }
 
     stylex={

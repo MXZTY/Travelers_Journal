@@ -22,7 +22,11 @@ class FavoriteItem extends React.Component {
     }
 
     styleFigure={
-        position: "relative"
+        position: "relative",
+        width: "150px",
+        height: "150px"
+        
+    
     }
 
     stylex={
