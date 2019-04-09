@@ -40,7 +40,7 @@ class PhotoMap extends React.Component {
 
     //get current photo
     const id = this.props.currentPhoto;
-    const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
+    const imgURL = `https://storage.googleapis.com/comp4513-asg2-bucket/photos/large/`;
 
     if (this.state.photos.length > 0) {
       //return the photo path from the id
@@ -51,21 +51,21 @@ class PhotoMap extends React.Component {
           <div className="mapView">
             <div className="mapElement">
               <MapContainer
-                city={photo.city}
+                city={photo.location.city}
                 containterElement={<div/>}
-                lat={photo.latitude}
-                long={photo.longitude}
+                lat={photo.location.latitude}
+                long={photo.location.longitude}
                 zoom={16}
               />
             </div>
             <div className="mapInfo">
-              <img src={imgURL + photo.path} alt={photo.title} />
+              <img src={imgURL + photo.filename} alt={photo.title} />
               <h1>{photo.title}</h1>
               <h1>
-                {photo.city}, {photo.country}
+                {photo.location.city}, {photo.location.country}
               </h1>
               <h1>
-                {this.calculateDist(photo.latitude, this.props.userLat, photo.longitude, this.props.userLong)} KM from current location
+                {this.calculateDist(photo.location.latitude, this.props.userLat, photo.location.longitude, this.props.userLong)} KM from current location
               </h1>
               <br />
               <button onClick={this.setView}>View</button>

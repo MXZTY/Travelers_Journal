@@ -33,8 +33,8 @@ class PhotoList extends React.Component {
     //returns an array filtered based on the users search term (stored in state)
     let filteredList = this.props.photos.filter(
       (photo)=>{
-          console.log(photo.id);
-          console.log(photo.id + " " + photo.location.country);
+         // console.log(photo.id);
+         // console.log(photo.id + " " + photo.location.country);
         //if city changed
         if(this.state.input==="City"){
           return photo.location.city.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
