@@ -8,7 +8,7 @@ var app = express();
 app.use(myParser.urlencoded({ extended: true }));
 
 const imageController = require('../controllers/images');
-const { validateBody, schemas } = require('../handlers/routeHelpers.js');
+const { validateBody, schemas } = require('../handlers/routeHelpers.js/index.js');
 
 const passportSignin = passport.authenticate('local', { session: false });
 const passportJWT = passport.authenticate('jwt', { session: false });

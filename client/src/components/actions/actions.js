@@ -29,7 +29,7 @@ export const signUp = (data) => {
             localStorage.setItem('apikey', res.data.apikey);
             localStorage.setItem('userid', res.data.userid);
             axios.defaults.headers.common['Authorization'] = res.data.token;
-
+            console.log("this is action .js", res.data.apikey);
         } catch (err) {
             dispatch({
                 type: AUTH_ERROR, 
@@ -61,8 +61,10 @@ export const signIn = (data) => {
 
             // step 4: save the JWT token into our local storage.
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('apikey', res.data.apikey);
+            localStorage.setItem('userid', res.data.userid);
             axios.defaults.headers.common['Authorization'] = res.data.token;
-
+            console.log("this is res in Actions" , res.data.apikey)
         } catch (err) {
             dispatch({
                 type: AUTH_ERROR, 

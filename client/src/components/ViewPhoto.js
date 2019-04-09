@@ -3,13 +3,13 @@ import './EditPhotoForm.css';
 
 class ViewPhoto extends Component{
     render(){
-        console.log(this.props.currentPhoto + " IS THE CURRENT PHOTO IN PHOTOVIEW");
+
         const id = this.props.currentPhoto;
         const imgURL =  `https://storage.googleapis.com/comp4513-asg2-bucket/photos/large/`;
       
         if(this.props.photos.length > 0){
             const photo = this.props.photos.find(p => p.id === id);
-              console.log(id);
+         
             return(
                 <article className="details">
                      <div className="detailsPhotoBox">

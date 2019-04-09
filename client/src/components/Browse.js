@@ -7,9 +7,7 @@ import UploadPhoto from "./UploadPhoto.js"
 import { getSecret } from "./actions/actions.js";
 import { connect } from "react-redux";
 import * as actions from "./actions/actions";
-import authenticationGuard from "./higherOrderComponents/authenticationGuard.js";
 import { Redirect } from "react-router-dom";
-import { noConflict } from "q";
 
 class Browse extends Component {
   // default the current photo value to 1, and set the default view to photoview, and no queryValue(filter).
@@ -135,7 +133,7 @@ class Browse extends Component {
 
   deletePhoto = id => {
     if (id === this.state.currentPhoto) {
-      console.log(id + 1, " asldkjfl   ", this.state.currentPhoto);
+      
 
       this.props.deletePhoto(id);
       this.setState({ currentPhoto: parseInt(id + 1) });
@@ -147,7 +145,6 @@ class Browse extends Component {
   // function for setting the state to the edit view for the photo id provided.
   // returns the render edit function above after the state is set to the new id
   setEdit = id => {
-    console.log("Setting the Edit View for Photo: " + id);
     this.setState({ currentPhoto: id, isEdit: true, isMap: false, isUpload:false});
     return this.renderEdit;
   };
@@ -155,7 +152,6 @@ class Browse extends Component {
   // function for setting the state to the map view for the photo id provided.
   // returns the render map function above after the state is set to the new id.
   setMap = id => {
-    console.log("Setting the Map View for Photo: " + id);
     this.setState({ currentPhoto: id, isMap: true, isEdit: false, isUpload:false });
     return this.renderMap;
   };
@@ -163,7 +159,6 @@ class Browse extends Component {
   // function for setting the state to the regular view for the photo id provided.
   // returns the render view function above after the state is set to the new id.
   setView = id => {
-    console.log("Setting the default View for Photo: " + id);
     this.setState({ currentPhoto: id, isMap: false, isEdit: false, isUpload:false });
     return this.renderView;
   };
@@ -172,7 +167,6 @@ class Browse extends Component {
 // function for setting the state to the uploadPhoto Form view 
   // returns the render uploadePhoto function above after the state is set to the new id.
   setUploadForm = id => {
-    console.log("Setting the Upload Photo Form View");
     this.setState({currentPhoto: id, isMap: false, isEdit: false, isUpload:true });
     return this.renderUploadForm;
   };
@@ -182,7 +176,6 @@ class Browse extends Component {
   };
 }
 function mapStateToProps(state) {
-  console.log("browse state: ", state);
   return {
     secret: state.browseAuth.secret,
     isAuthenticated: state.auth.isAuthenticated,

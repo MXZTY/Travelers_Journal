@@ -27,7 +27,7 @@ app.use('/api',require('./routes/imagesRoute'));
 const passport = require('./handlers/passport.js');
 
 const imageRouter = require('./handlers/imageRouter.js');
-imageRouter.handleAllImages(app, Image);
+// The following functions are used for uploading images. 
 imageRouter.handleSingleImage(app, Image);
 imageRouter.handlesUpload(app, Image);
 

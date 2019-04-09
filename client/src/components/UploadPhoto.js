@@ -54,7 +54,7 @@ handleChange = e => {
             return(
                 <article className="details">
                      <div className="detailsPhotoBox">
-                        <form className="photoForm" action="http://localhost:3001/api/image/23"method="post" enctype="multipart/form-data">
+                        <form className="photoForm" action="http://localhost:3001/api/image/23"method="post" encType="multipart/form-data">
                             <legend> Upload New Photo</legend>
                             
                             <label>Title</label>

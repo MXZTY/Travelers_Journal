@@ -1,6 +1,3 @@
-import authenticationGuard from "./components/higherOrderComponents/authenticationGuard";
-import { Redirect } from "react-router-dom";
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import HeaderApp from './components/HeaderApp.js';
 import Browse from './components/Browse.js'
@@ -9,8 +6,6 @@ import Favorites from './components/Favorites';
 import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux'; 
 import fontawesome from '@fortawesome/fontawesome'
 import faFreeSolid from '@fortawesome/fontawesome-free-solid'
 import SignIn from './components/Signin.js';
@@ -30,7 +25,7 @@ class App extends Component {
       const response = await fetch(url);
       const jsonData = await response.json();
       this.loading = true;
-        console.log(jsonData);
+
       this.setState( { photos: jsonData } );
       // call the update state with local storage method to restore the user favorited photos.
       await this.updateStateWithLocalStorage();
@@ -43,17 +38,29 @@ class App extends Component {
 
   updateStateWithLocalStorage = () => {
     // if the local storage length is 1 there are no favorited photos stored in localStorage.
-    // we must account for the JWT token being stored in local storage so it should alwas have a length of 1
-    if (localStorage.length > 1) {
+    // we must account for the JWT token being stored in local storage so it should always have a length of 1
+    if (localStorage.length > 3) {
       // for each of the items in the localStorage, iterate through.
       for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) === "JWT_TOKEN") {
+        if (localStorage.key(i) === "JWT_TOKEN" || localStorage.key(i)=== "apikey"||localStorage.key(i) ==='userid' ) {
+          
           continue;
         }
+        
         // pass in the parse key value to the addImageToFavorites to add it to the favorites bar.
         // this will take in the updated values of that photo too if they have been changed on the server,
         // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites.
+        
+
+        try{
         this.addImageToFavorites(JSON.parse(localStorage.key(i)), true);
+        }
+        catch(err){
+         
+          continue;
+        }
+      
+      
       }
     }
   };
@@ -72,7 +79,7 @@ class App extends Component {
   };
 
   deletePhoto = id => {
-    console.log("DELETING PHOTO " + id);
+  
     let copyPhotos = cloneDeep(this.state.photos);
     let photoToDelete = copyPhotos.find(p => p.id === id);
 
@@ -105,7 +112,6 @@ class App extends Component {
     //if the item is already in the favorites list, remove the item when the favorite button is pressed.
     // do not remove the item from favorites if loading is set to true
     if (this.state.favorites.find(f => f.id === id) && !loading) {
-      console.log("you are unfavoriting" + favoriteItem);
 
       localStorage.removeItem(id);
       // use the lodash remove function to remove the item the matches the id of the focused item.
