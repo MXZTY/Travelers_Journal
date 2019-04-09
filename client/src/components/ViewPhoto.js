@@ -14,7 +14,7 @@ class ViewPhoto extends Component{
                 <article className="details">
                      <div className="detailsPhotoBox">
                         <div className="photoForm">
-                            <img src={imgURL + photo.filename} alt={photo.title} /> 
+                            <img style={this.styleImage} src={imgURL + photo.filename} alt={photo.title} /> 
                             <br/>
                             <h3>Title: <i>{photo.title}</i></h3> <br/>
                             <h3>City: <i>{photo.location.city}</i></h3><br/>
@@ -40,7 +40,12 @@ class ViewPhoto extends Component{
             return null;
         }
     }
-
+    
+    styleImage={
+        width: "500px",
+        height: "450px"
+        
+    }
     setEdit = () => {
         this.props.setEdit(this.props.currentPhoto);
     }

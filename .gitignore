@@ -9,6 +9,7 @@ node_modules
 my-app/node_modules
 client/node_modules
 server/node_modules
+server/handlers../
 
 # Ignore all text files
 *.txt

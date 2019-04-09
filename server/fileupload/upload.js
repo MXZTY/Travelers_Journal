@@ -11,22 +11,12 @@ var BUCKET_NAME = 'comp4513-asg2-bucket'
 // https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket
 var myBucket = storage.bucket(BUCKET_NAME)
 
-// check if a file exists in bucket
-// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/file?method=exists
 var file = myBucket.file(imgName)
-file.exists()
-.then(exists => {
-	if(exists){
-		//file already exists, do nothing?
-	}
-})
-.catch(err => {
-	return err;
-})
+
 // upload file to bucket
 // https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket?method=upload
 let localFileLocation = imgPath;
-myBucket.upload(localFileLocation, { public: true })
+myBucket.upload(localFileLocation, { public: true, destination: "photos/large/" + imgName })
   .then(file => {
     // file saved
 	console.log("FILE WAS UPLOADED TO GOOGLE STORAGE");

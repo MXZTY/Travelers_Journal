@@ -28,10 +28,13 @@ class PhotoList extends React.Component {
   }
 
   render() {
+
     //https://www.youtube.com/watch?v=OlVkYnVXPl0
     //returns an array filtered based on the users search term (stored in state)
     let filteredList = this.props.photos.filter(
       (photo)=>{
+         // console.log(photo.id);
+         // console.log(photo.id + " " + photo.location.country);
         //if city changed
         if(this.state.input==="City"){
           return photo.location.city.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
@@ -42,6 +45,7 @@ class PhotoList extends React.Component {
     )
     if (this.props.photos.length > 1) {
       return (
+          
         <div className="flex-container">
          
           <div className="filterBy flex-box">

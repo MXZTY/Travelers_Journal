@@ -76,7 +76,7 @@ class EditPhotoForm extends React.Component{
           <div className="detailsPhotoBox">
             <form className="photoForm">
               <legend>Edit Photo Details</legend>
-              <img src={imgURL + photo.filename} alt={photo.title} />
+              <img style={this.styleImage} src={imgURL + photo.filename} alt={photo.title} />
               <label>Title</label>
               <input
                 type="text"
@@ -140,6 +140,11 @@ class EditPhotoForm extends React.Component{
       return null;
     }
   }
+   styleImage={
+        width: "500px",
+        height: "450px"
+        
+    }
 
     // function for calling the parent setView to change the view to Photo View with the current Photo id. 
     setView = () =>{
