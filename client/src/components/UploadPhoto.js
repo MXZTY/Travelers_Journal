@@ -54,14 +54,9 @@ handleChange = e => {
             return(
                 <article className="details" style={this.makeBigger}>
                      <div className="detailsPhotoBox">
-<<<<<<< HEAD
-                        <form className="photoForm" action="http://localhost:3001/api/image/23"method="post" encType="multipart/form-data">
-                            <legend> Upload New Photo</legend>
-=======
                         <form className="photoForm row" action="http://localhost:3001/api/image/23"method="post" enctype="multipart/form-data">
                 <div className="col-8">            
                 <legend> Upload New Photo</legend>
->>>>>>> 3e07409a37c963239144a160fb9bb39a76e172a9
                             
                             <label>Title</label>
                             <input type='text' name='title' />
